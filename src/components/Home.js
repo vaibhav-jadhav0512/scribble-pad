@@ -1,10 +1,11 @@
 import React from "react";
+import Notes from "./Notes";
 
 const Home = () => {
   return (
-    <div>
-      <h2>Home</h2>
-    </div>
+    <>
+      <Notes />
+    </>
   );
 };
 
