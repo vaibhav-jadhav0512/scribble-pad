@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = (props) => {
   const host = "http://localhost:8080";
@@ -52,6 +52,9 @@ const Login = (props) => {
             />
           </div>
           <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <h1 className="my-5">
+              ScribblePad<i class="fas fa-regular fa-pencil mx-3"></i>
+            </h1>
             <form onSubmit={submitHandler}>
               <div className="form-outline mb-4">
                 <input
@@ -81,11 +84,12 @@ const Login = (props) => {
               </div>
               <button
                 type="submit"
-                className="btn btn-primary btn-lg btn-block"
+                className="btn btn-primary btn-lg btn-block mb-3"
               >
                 Sign in
               </button>
             </form>
+            <Link to="/signup">Don't have an account? Signup...</Link>
           </div>
         </div>
       </div>
