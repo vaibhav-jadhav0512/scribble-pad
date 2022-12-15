@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
   const host = "http://localhost:8080";
   const history = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -32,11 +32,12 @@ const Login = () => {
         } else {
           const json = await response.json();
           localStorage.setItem("token", json.access_token);
+          props.showAlert("Logged in successfully!", "success");
           history("/");
         }
       })
       .catch(function (error) {
-        alert("Invalid credentials " + error);
+        props.showAlert("Invalid credentials " + error, "danger");
       });
   };
   return (

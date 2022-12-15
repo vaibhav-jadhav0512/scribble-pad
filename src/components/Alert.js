@@ -1,10 +1,15 @@
 import React from "react";
 
 const Alert = (props) => {
+  const { alert } = props;
   return (
-    <div className="alert alert-primary my-3" role="alert">
-      {props.message}
-    </div>
+    <>
+      {alert && (
+        <div className={`alert alert-${alert.type} my-3`} role="alert">
+          {alert.message}
+        </div>
+      )}
+    </>
   );
 };
 

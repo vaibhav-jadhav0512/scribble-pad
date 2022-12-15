@@ -8,6 +8,7 @@ const Modal = (props) => {
   const ehandleEditNote = (e) => {
     editNote(note.noteId, note.title, note.description, note.tag);
     refs.current.click();
+    props.showAlert("Note updated successfully!", "success");
   };
   const eonChangeHandler = (e) => {
     update({ ...note, [e.target.name]: e.target.value });
@@ -16,10 +17,11 @@ const Modal = (props) => {
     <div>
       <button
         type="button"
-        className="btn btn-primary invisible"
+        className="btn btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
         ref={refs}
+        style={{ display: "none" }}
       >
         Launch demo modal
       </button>

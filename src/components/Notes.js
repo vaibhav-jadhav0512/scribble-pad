@@ -4,7 +4,7 @@ import AddNote from "./AddNote";
 import Modal from "./Modal";
 import NoteItem from "./NoteItem";
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getAllNotes } = context;
   const [note, setNote] = useState({
@@ -30,10 +30,14 @@ const Notes = () => {
 
   return (
     <>
-      <AddNote />
-      <Modal refs={ref} note={note} update={update} />
+      <AddNote showAlert={props.showAlert} />
+      <Modal
+        refs={ref}
+        note={note}
+        update={update}
+        showAlert={props.showAlert}
+      />
       <div className="row my-3">
-        <h2>Your notes...</h2>
         {notes.length === 0 && (
           <div className="container my-3 mx-1">
             <h6 className="text-danger">Please add new note!</h6>
@@ -41,7 +45,12 @@ const Notes = () => {
         )}
         {notes.map((note) => {
           return (
-            <NoteItem key={note.noteId} updateNote={updateNote} note={note} />
+            <NoteItem
+              key={note.noteId}
+              updateNote={updateNote}
+              note={note}
+              showAlert={props.showAlert}
+            />
           );
         })}
       </div>

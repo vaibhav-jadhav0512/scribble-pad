@@ -10,7 +10,7 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
     setnotes(await res.json());
@@ -20,7 +20,7 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -33,7 +33,7 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({ noteId, title, description, tag }),
     });
@@ -54,7 +54,7 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
     const updatedNotes = notes.filter((note) => {

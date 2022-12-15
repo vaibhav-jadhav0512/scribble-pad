@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const host = "http://localhost:8080";
   const history = useNavigate();
   const [signup, setSignup] = useState({
@@ -41,7 +41,7 @@ const SignUp = () => {
     e.preventDefault();
     console.log(signup);
     if (signup.password !== signup.rpassword) {
-      alert("password not match!");
+      props.showAlert("Password does not match!", "danger");
       return;
     }
     const client_token = localStorage.getItem("client_token");
@@ -60,18 +60,19 @@ const SignUp = () => {
         credentials: [{ type: "password", value: signup.password }],
       }),
     });
-    console.log(createUser.status);
+    if (createUser.status === 201) history("/login");
+    else alert("Unexpected error");
   };
   return (
     <div className="container h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-lg-12 col-xl-11">
-          <div className="card-body p-md-5">
+          <div className="card-body">
             <div className="row justify-content-center">
               <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <p className="text-center h2 fw-bold mb-5">Sign up</p>
+                <p className="text-center h2 fw-bold my-3">Sign up</p>
                 <form className="mx-1 mx-md-4" onSubmit={onSubmitHandler}>
-                  <div className="d-flex flex-row align-items-center mb-4">
+                  <div className="d-flex flex-row align-items-center ">
                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input
@@ -87,7 +88,7 @@ const SignUp = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="d-flex flex-row align-items-center mb-4">
+                  <div className="d-flex flex-row align-items-center ">
                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input
@@ -103,7 +104,7 @@ const SignUp = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="d-flex flex-row align-items-center mb-4">
+                  <div className="d-flex flex-row align-items-center ">
                     <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input
@@ -119,7 +120,7 @@ const SignUp = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="d-flex flex-row align-items-center mb-4">
+                  <div className="d-flex flex-row align-items-center ">
                     <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input
@@ -137,7 +138,7 @@ const SignUp = () => {
                     </div>
                   </div>
 
-                  <div className="d-flex flex-row align-items-center mb-4">
+                  <div className="d-flex flex-row align-items-center ">
                     <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input
@@ -155,7 +156,7 @@ const SignUp = () => {
                     </div>
                   </div>
 
-                  <div className="d-flex flex-row align-items-center mb-4">
+                  <div className="d-flex flex-row align-items-center ">
                     <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input
@@ -167,7 +168,7 @@ const SignUp = () => {
                         onChange={onChangeHandler}
                       />
                       <label className="form-label" htmlFor="rpassword">
-                        Repeat your password
+                        Confirm Password
                       </label>
                     </div>
                   </div>
